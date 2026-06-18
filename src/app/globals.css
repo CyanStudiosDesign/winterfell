@@ -1,0 +1,383 @@
+@import "tailwindcss";
+
+@theme {
+  /* ─────────────────────────────────────────
+     BACKGROUNDS
+     bg-canvas        → page root background
+     bg-surface        → cards, panels, sidebars
+     bg-subtle         → hover tints, striped rows, divider fills
+     bg-inverse        → dark sections, inverted hero blocks
+     bg-disabled       → disabled input / button background
+  ───────────────────────────────────────── */
+  --color-canvas: #ffffff;
+  --color-surface: #f9f9f9;
+  --color-subtle: #f1f1f1;
+  --color-inverse: #111111;
+  --color-disabled: #f3f4f6;
+
+  /* ─────────────────────────────────────────
+     OVERLAY / SCRIM
+     bg-overlay        → modal backdrop, drawer scrim
+     bg-overlay-subtle → image overlays, video scrims, hover tints on media
+  ───────────────────────────────────────── */
+  --color-overlay: rgb(0 0 0 / 0.5);
+  --color-overlay-subtle: rgb(0 0 0 / 0.2);
+
+  /* ─────────────────────────────────────────
+     FOREGROUND (TEXT)
+     text-fg           → primary body copy
+     text-fg-muted     → secondary / helper text, captions
+     text-fg-subtle    → disabled labels, placeholders, timestamps
+     text-fg-inverse   → text on dark / inverse backgrounds
+  ───────────────────────────────────────── */
+  --color-fg: #111111;
+  --color-fg-muted: #6b7280;
+  --color-fg-subtle: #9ca3af;
+  --color-fg-inverse: #ffffff;
+
+  /* ─────────────────────────────────────────
+     BRAND — PRIMARY
+     bg-primary        → filled CTA buttons, active nav indicators
+     bg-primary-hover  → hover state on filled primary buttons
+     text-primary      → text links styled with brand color (use color-link for regular links)
+     border-primary    → active tab underlines, focus accents
+     text-primary-fg   → text ON a filled primary background (e.g. button label)
+  ───────────────────────────────────────── */
+  --color-primary: oklch(58.6% 0.253 17.585);
+  --color-primary-hover: oklch(64.5% 0.246 16.439);
+  --color-primary-fg: #ffffff;
+
+  /* ─────────────────────────────────────────
+     BRAND — SECONDARY
+     bg-secondary        → secondary buttons, badge fills, tag backgrounds
+     bg-secondary-hover  → hover state on secondary buttons
+     text-secondary-fg   → text ON a filled secondary background
+  ───────────────────────────────────────── */
+  --color-secondary: #6366f1;
+  --color-secondary-hover: #4f46e5;
+  --color-secondary-fg: #ffffff;
+
+  /* ─────────────────────────────────────────
+     LINKS
+     text-link       → anchor tags, inline text links
+     text-link-hover → hover state on text links
+     (keep separate from primary so theming a brand color never breaks links)
+  ───────────────────────────────────────── */
+  --color-link: #2563eb;
+  --color-link-hover: #1d4ed8;
+
+  /* ─────────────────────────────────────────
+     BORDERS
+     border-base     → default input borders, card outlines, dividers
+     border-strong   → focus rings, active input borders
+     border-disabled → disabled input / select borders
+  ───────────────────────────────────────── */
+  --color-border: #e5e7eb;
+  --color-border-strong: #6366f1;
+  --color-border-disabled: #e5e7eb;
+
+  /* ─────────────────────────────────────────
+     SEMANTIC TRIPLETS
+     Each semantic color has three roles:
+       base    → icon color, border accent        e.g. text-success, border-success
+       subtle  → soft background tint             e.g. bg-success-subtle  (use on banners, toasts, alerts)
+       strong  → readable text on that tint       e.g. text-success-strong
+  ───────────────────────────────────────── */
+  --color-success: #16a34a;
+  --color-success-subtle: #f0fdf4;
+  --color-success-strong: #14532d;
+
+  --color-warning: #d97706;
+  --color-warning-subtle: #fffbeb;
+  --color-warning-strong: #78350f;
+
+  --color-danger: #dc2626;
+  --color-danger-subtle: #fef2f2;
+  --color-danger-strong: #7f1d1d;
+
+  --color-info: #2563eb;
+  --color-info-subtle: #eff6ff;
+  --color-info-strong: #1e3a8a;
+
+  /* ─────────────────────────────────────────
+     SKELETON / LOADING
+     bg-skeleton-base  → base fill of skeleton placeholder blocks
+     bg-skeleton-shine → shimmer highlight color (use in CSS @keyframes)
+     Example:
+       <div className="bg-skeleton-base animate-pulse rounded-md" />
+  ───────────────────────────────────────── */
+  --color-skeleton-base: #e5e7eb;
+  --color-skeleton-shine: #f3f4f6;
+
+  /* ─────────────────────────────────────────
+     FOCUS RING
+     Use .focus-ring-visible on every interactive element
+     The ring color and offset are consumed by the utility class below
+  ───────────────────────────────────────── */
+  --ring: #6366f1;
+  --ring-offset: 2px;
+
+  /* ─────────────────────────────────────────
+     SPACING — 8pt grid
+     Use Tailwind spacing classes (p-4, gap-6, mt-8) wherever possible.
+     Reference these as var(--spacing-*) only when writing raw CSS,
+     e.g. inside @layer components or inline styles.
+     Scale: 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 80 · 96 · 128
+  ───────────────────────────────────────── */
+  --spacing-1: 4px; /* p-1  gap-1  mt-1  */
+  --spacing-2: 8px; /* p-2  gap-2  mt-2  */
+  --spacing-3: 12px; /* p-3  gap-3  mt-3  */
+  --spacing-4: 16px; /* p-4  gap-4  mt-4  */
+  --spacing-6: 24px; /* p-6  gap-6  mt-6  */
+  --spacing-8: 32px; /* p-8  gap-8  mt-8  */
+  --spacing-12: 48px; /* p-12 gap-12 mt-12 */
+  --spacing-16: 64px; /* p-16 gap-16 mt-16 */
+  --spacing-20: 80px; /* p-20 gap-20 mt-20 — section vertical padding */
+  --spacing-24: 96px; /* p-24 gap-24 mt-24 — hero vertical padding     */
+  --spacing-32: 128px; /* p-32 gap-32 mt-32 — full-bleed section gaps   */
+
+  /* ─────────────────────────────────────────
+     TYPOGRAPHY — FONT FAMILIES
+     font-sans  → all UI text (default)
+     font-mono  → code blocks, IDs, prices, data tables, input[type=number]
+  ───────────────────────────────────────── */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  /* ─────────────────────────────────────────
+     TYPOGRAPHY — FONT SIZES
+     text-xs      → badges, labels, legal copy        (12px)
+     text-sm      → captions, table cells, helper text (14px)
+     text-base    → body copy                          (16px)
+     text-lg      → card titles, subheadings           (20px)
+     text-xl      → section headings                   (24px)
+     text-2xl     → page titles, feature headings      (32px)
+     text-3xl     → large hero subheadings             (40px)
+     text-display → hero headlines, big marketing copy (56px)
+  ───────────────────────────────────────── */
+  --text-xs: 0.75rem; /* text-xs      */
+  --text-sm: 0.875rem; /* text-sm      */
+  --text-base: 1rem; /* text-base    */
+  --text-lg: 1.25rem; /* text-lg      */
+  --text-xl: 1.5rem; /* text-xl      */
+  --text-2xl: 2rem; /* text-2xl     */
+  --text-3xl: 2.5rem; /* text-3xl     */
+  --text-display: 3.5rem; /* text-display */
+
+  /* ─────────────────────────────────────────
+     TYPOGRAPHY — FONT WEIGHTS
+     font-normal   → body copy, descriptions     font-normal
+     font-medium   → labels, UI emphasis         font-medium
+     font-semibold → subheadings, card titles    font-semibold
+     font-bold     → display headings, price tags, CTAs  font-bold
+  ───────────────────────────────────────── */
+  --font-weight-normal: 400; /* font-normal   */
+  --font-weight-medium: 500; /* font-medium   */
+  --font-weight-semibold: 600; /* font-semibold */
+  --font-weight-bold: 700; /* font-bold     */
+
+  /* ─────────────────────────────────────────
+     TYPOGRAPHY — LINE HEIGHTS
+     leading-none   → single-line UI: buttons, badges, table cells  (1.0)
+     leading-tight  → headings, display text                         (1.25)
+     leading-snug   → card titles, short labels                      (1.4)
+     leading-normal → body copy, descriptions                        (1.6)
+     leading-display → oversized hero headlines                      (1.05)
+  ───────────────────────────────────────── */
+  --leading-none: 1; /* leading-none    */
+  --leading-tight: 1.25; /* leading-tight   */
+  --leading-snug: 1.4; /* leading-snug    */
+  --leading-normal: 1.6; /* leading-normal  */
+  --leading-display: 1.05; /* leading-display */
+
+  /* ─────────────────────────────────────────
+     BORDER RADIUS
+     rounded-sm   → chips, tags, small badges          rounded-sm
+     rounded-md   → inputs, buttons, dropdowns         rounded-md
+     rounded-lg   → cards, modals, panels              rounded-lg
+     rounded-full → pill buttons, avatars, status dots rounded-full
+  ───────────────────────────────────────── */
+  --radius-sm: 4px; /* rounded-sm   */
+  --radius-md: 8px; /* rounded-md   */
+  --radius-lg: 12px; /* rounded-lg   */
+  --radius-full: 9999px; /* rounded-full */
+
+  /* ─────────────────────────────────────────
+     SHADOWS
+     shadow-none → explicit reset (overrides inherited shadow)  shadow-none
+     shadow-sm   → cards, input fields, small dropdowns         shadow-sm
+     shadow-md   → floating panels, popovers, date pickers      shadow-md
+     shadow-lg   → modals, drawers, command palettes            shadow-lg
+  ───────────────────────────────────────── */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.08);
+  --shadow-md: 0 4px 16px 0 rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 8px 32px 0 rgb(0 0 0 / 0.14), 0 2px 8px 0 rgb(0 0 0 / 0.08);
+
+  /* ─────────────────────────────────────────
+     Z-INDEX — semantic layers
+     Always use these instead of raw numbers.
+     z-base     → default in-flow elements
+     z-sticky   → sticky headers, nav bars
+     z-dropdown → menus, selects, autocomplete
+     z-popover  → tooltips, popovers, date pickers
+     z-modal    → dialogs, drawers, sheets
+     z-toast    → notifications, snackbars (always on top)
+  ───────────────────────────────────────── */
+  --z-base: 0; /* z-[var(--z-base)]     */
+  --z-sticky: 100; /* z-[var(--z-sticky)]   */
+  --z-dropdown: 200; /* z-[var(--z-dropdown)] */
+  --z-popover: 300; /* z-[var(--z-popover)]  */
+  --z-modal: 400; /* z-[var(--z-modal)]    */
+  --z-toast: 500; /* z-[var(--z-toast)]    */
+}
+
+/* ─────────────────────────────────────────
+   DARK THEME
+   Only overrides values that change in dark mode.
+   Spacing, radius, z-index, font stacks stay the same.
+   Apply by setting data-theme="dark" on <html>.
+───────────────────────────────────────── */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --color-canvas: #0a0a0a;
+  --color-surface: #151515;
+  --color-subtle: #262626;
+  --color-inverse: #e5e5e5;
+  --color-disabled: #1e1e24;
+
+  /* Overlay — stronger in dark mode so scrims are still visible */
+  --color-overlay: rgb(0 0 0 / 0.7);
+  --color-overlay-subtle: rgb(0 0 0 / 0.35);
+
+  /* Foreground */
+  --color-fg: #e5e5e5;
+  --color-fg-muted: #a7a7a7;
+  --color-fg-subtle: #4b5563;
+  --color-fg-inverse: #111111;
+
+  /* Brand */
+  --color-primary: oklch(58.6% 0.253 17.585);
+  --color-primary-hover: oklch(64.5% 0.246 16.439);
+  --color-primary-fg: #ffffff;
+  --color-secondary: #818cf8;
+  --color-secondary-hover: #6366f1;
+  --color-secondary-fg: #ffffff;
+
+  /* Links */
+  --color-link: #60a5fa;
+  --color-link-hover: #93c5fd;
+
+  /* Borders */
+  --color-border: #2e2e36;
+  --color-border-strong: #818cf8;
+  --color-border-disabled: #2e2e36;
+
+  /* Semantic */
+  --color-success: #4ade80;
+  --color-success-subtle: #052e16;
+  --color-success-strong: #bbf7d0;
+
+  --color-warning: #fbbf24;
+  --color-warning-subtle: #1c1200;
+  --color-warning-strong: #fef08a;
+
+  --color-danger: #f87171;
+  --color-danger-subtle: #1f0707;
+  --color-danger-strong: #fecaca;
+
+  --color-info: #60a5fa;
+  --color-info-subtle: #0a1628;
+  --color-info-strong: #bfdbfe;
+
+  /* Skeleton — more visible on dark surfaces */
+  --color-skeleton-base: #1e1e24;
+  --color-skeleton-shine: #2e2e36;
+
+  /* Focus ring */
+  --ring: #818cf8;
+
+  /* Shadows — higher alpha so elevation reads on dark backgrounds */
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 16px 0 rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 8px 32px 0 rgb(0 0 0 / 0.5), 0 2px 8px 0 rgb(0 0 0 / 0.3);
+}
+
+/* ─────────────────────────────────────────
+   FOCUS RING UTILITY
+   Add focus-ring-visible to every interactive element:
+   <button className="focus-ring-visible" />
+   <input  className="focus-ring-visible" />
+   <a      className="focus-ring-visible" />
+───────────────────────────────────────── */
+
+
+@layer base {
+  h1 {
+    font-family: var(--font-heading-one), system-ui, sans-serif;
+  }
+
+  p {
+    font-family: var(--font-paragraph), Georgia, serif;
+  }
+}
+
+/* these css is for tree view  */
+@layer utilities {
+  .focus-ring-visible:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: var(--ring-offset);
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+@layer components {
+  .tree-view {
+    --tree-line-color: color-mix(
+      in oklch,
+      var(--color-fg-subtle) 70%,
+      var(--color-border)
+    );
+  }
+
+  .tree-view-branch {
+    position: relative;
+  }
+
+  .tree-view-branch::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 12px;
+    width: 1px;
+    background: var(--tree-line-color);
+  }
+
+  .tree-view-row {
+    position: relative;
+  }
+
+  .tree-view-row[data-level="0"]::before {
+    display: none;
+  }
+
+  .tree-view-row[data-level]:not([data-level="0"])::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    width: 16px;
+    height: 1px;
+    background: var(--tree-line-color);
+  }
+}

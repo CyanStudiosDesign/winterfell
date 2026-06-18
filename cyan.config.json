@@ -1,0 +1,9 @@
+{
+  "componentsDir": "src/components",
+  "uiDir": "src/components/ui",
+  "blocksDir": "src/components/blocks",
+  "providersDir": "src/components/providers",
+  "utilsPath": "src/lib/utils.ts",
+  "cssPath": "src/app/globals.css",
+  "alias": "@"
+}
