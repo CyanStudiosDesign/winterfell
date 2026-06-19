@@ -10,6 +10,7 @@ import { Fragment } from "react"
 import CountrySelect from "../country-select"
 import LanguageSelect from "../language-select"
 import { Locale } from "@lib/data/locales"
+import { Menu } from "lucide-react"
 
 
 const SideMenuItems = {
@@ -39,9 +40,9 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
+                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none "
                 >
-                  Menu
+                  <Menu />
                 </Popover.Button>
               </div>
 
