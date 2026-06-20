@@ -56,16 +56,16 @@ export default function ProductListDetailsPage() {
           </div>
         </section>
 
-        <div className="grid gap-8 md:grid-cols-[190px_1fr]">
+        <div className="grid gap-8 md:grid-cols-[190px_1fr] animate-in fade-in duration-500">
           <ProductListSidebar />
 
-          <section>
+          <section className="animate-in fade-in slide-in-from-right-4 duration-500 delay-75 fill-mode-both">
             <p className="mb-1 text-xs text-gray-500">Home / Wink Collection</p>
             <h2 className="mb-5 text-xl font-semibold">Wink Collection</h2>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {products.map((product) => (
-                <ProductCard key={product.name} product={product} />
+              {products.map((product, index) => (
+                <ProductCard key={product.name} product={product} index={index} />
               ))}
             </div>
           </section>

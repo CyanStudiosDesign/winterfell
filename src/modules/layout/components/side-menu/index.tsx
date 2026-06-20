@@ -16,6 +16,7 @@ const SideMenuItems = {
   Home: "/",
   Store: "/store",
   "Product List Details": "/product-list-details",
+  "Product Details": "/product-details-page",
   Account: "/account",
   Cart: "/cart",
 }
