@@ -4,9 +4,9 @@ import ProductDetail from "./product-detail"
 
 export default function ProductDetailsPage() {
   return (
-    <main className="min-h-screen bg-[#d9dddc] px-4 py-10">
-      <section className="mx-auto max-w-6xl rounded-lg bg-white p-6 shadow-sm md:p-8">
-        <p className="mb-7 text-xs text-gray-500">Home / Product details</p>
+    <main className="">
+      <section className="bg-white max-w-7xl mx-auto px-4 mt-5">
+        <p className="mb-5 text-xs text-gray-500">Home / Product details</p>
 
         <ProductDetail />
 

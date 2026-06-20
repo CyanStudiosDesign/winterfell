@@ -29,7 +29,7 @@ export default function Nav2() {
   ]
 
   return (
-    <div className="bg-red-400 top-0 inset-x-0 ">
+    <div className="hidden md:block top-0 inset-x-0">
       <header className="h-16 w-full border-b bg-white/75 backdrop-blur-md border-neutral-100 transition-all duration-200">
         <nav className="max-w-7xl mx-auto h-full px-4 sm:px-4 lg:px-4 flex items-center justify-between text-xs font-medium gap-x-2 ">
           

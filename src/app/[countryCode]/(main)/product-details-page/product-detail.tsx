@@ -89,21 +89,14 @@ export default function ProductDetail() {
               alt={index === 0 ? selectedProduct.name : `${selectedProduct.name} detail ${index}`}
               className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
-            {/* Hover overlay */}
-            <div className="absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
-              <span className="rounded-full bg-white/90 p-2.5 shadow-md transform scale-90 transition-transform duration-300 group-hover:scale-100 text-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.637 10.637z" />
-                </svg>
-              </span>
-            </div>
+            
           </div>
         ))}
       </div>
 
-      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-stretch">
+      <div className="mt-6 flex flex-col gap-6 small:flex-row small:items-stretch">
         {/* Left Info Panel */}
-        <section className="rounded-2xl bg-[#f4f4f2]/80 backdrop-blur-sm p-6 shadow-sm border border-gray-100 lg:w-1/2 flex flex-col justify-between">
+        <section className="rounded-2xl bg-[#f4f4f2]/80 backdrop-blur-sm p-6 shadow-sm border border-gray-100 small:w-1/2 flex flex-col justify-between">
           <div>
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -196,7 +189,7 @@ export default function ProductDetail() {
         </section>
 
         {/* Right Action / Reviews Panel */}
-        <section className="rounded-2xl bg-[#f4f4f2]/80 backdrop-blur-sm p-6 shadow-sm border border-gray-100 lg:w-1/2 flex flex-col justify-between">
+        <section className="rounded-2xl bg-[#f4f4f2]/80 backdrop-blur-sm p-6 shadow-sm border border-gray-100 small:w-1/2 flex flex-col justify-between">
           <div>
             {/* Purchase banner */}
             <div className="rounded-xl flex items-center justify-between gap-4 bg-gray-950 p-4 text-white shadow-lg transition-all duration-300">
