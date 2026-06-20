@@ -74,20 +74,20 @@ function FilterCheckbox({ label, count }: { label: string; count: number }) {
       role="checkbox"
       aria-checked={checked}
       onClick={() => setChecked((v) => !v)}
-      className="flex w-full items-center gap-3 text-left"
+      className="flex w-full items-center gap-3 text-left group/check"
     >
       <span
-        className={`grid size-5 shrink-0 place-items-center rounded-md border transition-colors ${
+        className={`grid size-5 shrink-0 place-items-center rounded-md border transition-all duration-300 active:scale-75 ${
           checked
-            ? "border-black bg-black text-white"
-            : "border-gray-300 bg-white text-transparent"
+            ? "border-black bg-black text-white shadow-sm scale-100"
+            : "border-gray-300 bg-white text-transparent group-hover/check:border-gray-400"
         }`}
       >
-        <Check className="size-3.5" strokeWidth={3} />
+        <Check className={`size-3.5 transition-transform duration-200 ${checked ? "scale-100" : "scale-0"}`} strokeWidth={3} />
       </span>
-      <span className="flex flex-1 items-center justify-between gap-3">
+      <span className="flex flex-1 items-center justify-between gap-3 text-sm text-gray-600 group-hover/check:text-gray-900 transition-colors">
         <span className="font-medium">{label}</span>
-        <span className="text-xs text-gray-400">{count}</span>
+        <span className="text-xs text-gray-400 font-semibold">{count}</span>
       </span>
     </button>
   )
