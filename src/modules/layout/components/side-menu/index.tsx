@@ -90,6 +90,30 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                           <XMark className="w-5 h-5" />
                         </button>
                       </div>
+                      {/* Search Bar - Mobile Only */}
+                      <div className="block md:hidden px-3 mb-6">
+                        <div className="relative flex items-center w-full">
+                          <input
+                            type="text"
+                            placeholder="Search..."
+                            className="w-full bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700/50 text-slate-200 placeholder-slate-500 font-normal text-xs pl-4 pr-10 h-9 rounded-full focus:outline-none focus:ring-1 focus:ring-slate-600 focus:border-transparent transition-all"
+                          />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            className="w-3.5 h-3.5 absolute right-3.5 text-slate-500 pointer-events-none"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
 
                       {/* MIDDLE SECTION: Main Links */}
                       <div>
@@ -109,6 +133,31 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                               </li>
                             )
                           })}
+                        </ul>
+                      </div>
+
+                      {/* Shop Categories - Mobile Only */}
+                      <div className="block md:hidden mt-6">
+                        <span className="text-xs font-semibold text-slate-500 tracking-wider uppercase px-3 block mb-4">Shop Categories</span>
+                        <ul className="flex flex-col gap-1.5 items-stretch justify-start">
+                          {[
+                            { name: "New Arrivals", href: "/new" },
+                            { name: "Sale", href: "/sale" },
+                            { name: "Men", href: "/men" },
+                            { name: "Women", href: "/women" },
+                            { name: "Children", href: "/children" },
+                            { name: "Brand", href: "/brand" },
+                          ].map((link) => (
+                            <li key={link.name}>
+                              <LocalizedClientLink
+                                href={link.href}
+                                className="block text-base font-medium px-4 py-3 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-slate-800/30 transition-all duration-150"
+                                onClick={close}
+                              >
+                                {link.name}
+                              </LocalizedClientLink>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     </div>

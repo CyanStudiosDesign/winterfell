@@ -1,11 +1,13 @@
 import { products } from "./data"
 import ProductCard from "./product-card"
 import ProductListSidebar from "./product-list-sidebar"
+import { Drawer, DrawerTrigger, DrawerContent } from "@/components/ui/drawer"
+
 
 export default function ProductListDetailsPage() {
   return (
-    <main className="min-h-screen bg-[#d9dddc] px-4 py-10">
-      <section className="mx-auto max-w-6xl rounded-lg bg-white p-6 shadow-sm">
+    <main className="">
+      <section className="rounded-lg bg-white shadow-sm max-w-7xl mx-auto px-4 my-5">
         {/* <header className="mb-6 flex items-center justify-between gap-4">
           <button className="text-xl">≡</button>
 
@@ -57,11 +59,37 @@ export default function ProductListDetailsPage() {
         </section>
 
         <div className="grid gap-8 md:grid-cols-[190px_1fr] animate-in fade-in duration-500">
-          <ProductListSidebar />
+          <div className="hidden md:block">
+            <ProductListSidebar />
+          </div>
 
           <section className="animate-in fade-in slide-in-from-right-4 duration-500 delay-75 fill-mode-both">
-            <p className="mb-1 text-xs text-gray-500">Home / Wink Collection</p>
-            <h2 className="mb-5 text-xl font-semibold">Wink Collection</h2>
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <p className="mb-1 text-xs text-gray-500">Home / Wink Collection</p>
+                <h2 className="text-xl font-semibold">Wink Collection</h2>
+              </div>
+              
+              {/* Mobile Filter Drawer */}
+              <div className="block md:hidden">
+                <Drawer>
+                  <DrawerTrigger>
+                    <button className="flex items-center gap-x-2 px-4 py-2 border border-neutral-200 rounded-full text-xs font-semibold hover:bg-neutral-50 active:scale-95 transition-all text-neutral-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-neutral-500">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+                      </svg>
+                      Filters
+                    </button>
+                  </DrawerTrigger>
+                  <DrawerContent>
+                    <div className="p-6 max-h-[60vh] overflow-y-auto">
+                      <h3 className="text-base font-bold text-neutral-900 mb-4 pb-2 border-b border-neutral-100">Filters</h3>
+                      <ProductListSidebar />
+                    </div>
+                  </DrawerContent>
+                </Drawer>
+              </div>
+            </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {products.map((product, index) => (
