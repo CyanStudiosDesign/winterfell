@@ -28,7 +28,6 @@ import {
 } from "./data"
 import Spinner from "@/components/ui/spinner/Spinner"
 
-
 export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(productColors[2].name)
   const [selectedSize, setSelectedSize] = useState("M")
@@ -111,9 +110,11 @@ export default function ProductDetail() {
         ))}
       </div>
 
-      <div className="mt-6 flex flex-col gap-6 small:flex-row small:items-stretch">
+      <div className="mt-6 flex flex-col gap-6 small:flex-row small:items-start">
+        {" "}
         {/* Left Info Panel */}
-        <section className="rounded-2xl bg-[#f4f4f2]/80 backdrop-blur-sm p-6 shadow-sm border border-gray-100 small:w-1/2 flex flex-col justify-between">
+        <section className="rounded-2xl bg-[#f4f4f2]/80 backdrop-blur-sm p-6 shadow-sm border border-gray-100 small:w-1/2">
+          {" "}
           <div>
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -210,7 +211,6 @@ export default function ProductDetail() {
               </div>
             </fieldset>
           </div>
-
           <Accordion
             type="multiple"
             className="mt-8 rounded-none border-x-0 border-t border-gray-200 bg-transparent"
@@ -231,7 +231,6 @@ export default function ProductDetail() {
             ))}
           </Accordion>
         </section>
-
         {/* Right Action / Reviews Panel */}
         <section className="rounded-2xl bg-[#f4f4f2]/80 backdrop-blur-sm p-6 shadow-sm border border-gray-100 small:w-1/2 flex flex-col justify-between">
           <div>
@@ -286,18 +285,18 @@ export default function ProductDetail() {
               </div>
 
               <div className="space-y-6">
-                {reviews.map((review) => (
+                {reviews.map((review, index) => (
                   <article
-                    key={review.name}
+                    key={review.name || index}
                     className="transition-all duration-300 hover:translate-x-1"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="grid size-9 place-items-center rounded-full bg-gray-200 text-xs font-semibold text-gray-800 shadow-sm">
-                        {review.name
-                          .split(" ")
-                          .map((part) => part[0])
-                          .join("")}
-                      </div>
+                      <img
+                        src={`https://i.pravatar.cc/150?img=${index + 10}`} // ✅ Works perfectly now!
+                        alt={review.name}
+                        className="size-10 rounded-full object-cover shadow-sm"
+                      />
+
                       <div>
                         <p className="text-sm font-semibold text-gray-900">
                           {review.name}
@@ -358,7 +357,6 @@ export default function ProductDetail() {
           >
             <ChevronRight className="size-6" />
           </button>
-
           {/* Indicator text */}
           <div className="absolute bottom-5 text-sm font-semibold text-white/60">
             {lightboxIndex + 1} / {productGallery.length}

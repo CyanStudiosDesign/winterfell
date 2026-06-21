@@ -11,6 +11,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumbs/BreadCrumbs"
 
+import Carousel from "@/components/ui/carousel/Carousel"
+
 export default function ProductDetailsPage() {
   return (
     <main className="">
