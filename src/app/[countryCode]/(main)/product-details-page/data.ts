@@ -48,11 +48,20 @@ export const reviews = [
     name: "Alexander Stewart",
     rating: 5,
     text: "Great fit and very soft. The green color is even better in person.",
+    images: [
+      productGallery[0],
+      productGallery[1],
+      productGallery[2],
+    ],
   },
   {
     name: "Sienna Wei",
     rating: 4,
     text: "Comfortable for daily wear and the fabric feels really good.",
+    images: [
+      productGallery[1],
+      productGallery[3],
+    ],
   },
 ]
 
