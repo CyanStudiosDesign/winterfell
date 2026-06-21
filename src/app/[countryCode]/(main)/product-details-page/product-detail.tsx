@@ -26,6 +26,7 @@ import {
   reviews,
   selectedProduct,
 } from "./data"
+import Spinner from "@/components/ui/spinner/Spinner"
 
 export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(productColors[2].name)
@@ -252,7 +253,7 @@ export default function ProductDetail() {
               >
                 {isAdding ? (
                   <>
-                    <Loader2 className="size-4 animate-spin" />
+                    <Spinner />
                     <span>Adding...</span>
                   </>
                 ) : isInBag ? (
@@ -275,7 +276,6 @@ export default function ProductDetail() {
                 <h2 className="text-lg font-bold text-gray-800">
                   Reviews (44)
                 </h2>
-
                 <button
                   type="button"
                   className="text-sm font-medium text-gray-700 underline underline-offset-4 hover:text-gray-900 transition-colors"
@@ -284,15 +284,15 @@ export default function ProductDetail() {
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {reviews.map((review, index) => (
                   <article
-                    key={review.name}
-                    className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:shadow-md"
+                    key={review.name || index}
+                    className="transition-all duration-300 hover:translate-x-1"
                   >
                     <div className="flex items-center gap-3">
                       <img
-                        src={`https://i.pravatar.cc/150?img=${index + 10}`}
+                        src={`https://i.pravatar.cc/150?img=${index + 10}`} // ✅ Works perfectly now!
                         alt={review.name}
                         className="size-10 rounded-full object-cover shadow-sm"
                       />
@@ -301,7 +301,6 @@ export default function ProductDetail() {
                         <p className="text-sm font-semibold text-gray-900">
                           {review.name}
                         </p>
-
                         <Rating.Half
                           value={review.rating}
                           totalStars={5}
@@ -309,23 +308,9 @@ export default function ProductDetail() {
                         />
                       </div>
                     </div>
-
-                    <p className="mt-3 text-sm leading-6 text-gray-600">
+                    <p className="mt-2.5 text-sm leading-6 text-gray-600 pl-1">
                       {review.text}
                     </p>
-
-                    {review.images?.length > 0 && (
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {review.images.map((image, imageIndex) => (
-                          <img
-                            key={imageIndex}
-                            src={image}
-                            alt={`Review image ${imageIndex + 1}`}
-                            className="h-20 w-20 rounded-lg object-cover border border-gray-200 transition-transform duration-200 hover:scale-105"
-                          />
-                        ))}
-                      </div>
-                    )}
                   </article>
                 ))}
               </div>
