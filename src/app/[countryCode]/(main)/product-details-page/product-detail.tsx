@@ -1,7 +1,15 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Heart, ShoppingBag, X, ChevronLeft, ChevronRight, Loader2, Check } from "lucide-react"
+import {
+  Heart,
+  ShoppingBag,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Loader2,
+  Check,
+} from "lucide-react"
 import { Button } from "@/components/ui/buttons/Buttons"
 import {
   Accordion,
@@ -18,6 +26,8 @@ import {
   reviews,
   selectedProduct,
 } from "./data"
+import Spinner from "@/components/ui/spinner/Spinner"
+
 
 export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(productColors[2].name)
@@ -42,12 +52,16 @@ export default function ProductDetail() {
 
   const handlePrevImage = () => {
     if (lightboxIndex === null) return
-    setLightboxIndex((prev) => (prev === 0 ? productGallery.length - 1 : prev! - 1))
+    setLightboxIndex((prev) =>
+      prev === 0 ? productGallery.length - 1 : prev! - 1
+    )
   }
 
   const handleNextImage = () => {
     if (lightboxIndex === null) return
-    setLightboxIndex((prev) => (prev === productGallery.length - 1 ? 0 : prev! + 1))
+    setLightboxIndex((prev) =>
+      prev === productGallery.length - 1 ? 0 : prev! + 1
+    )
   }
 
   const triggerFavorite = () => {
@@ -80,16 +94,19 @@ export default function ProductDetail() {
               index === 0
                 ? "col-span-2 aspect-[4/5] md:row-span-2 md:aspect-auto"
                 : index === productGallery.length - 1
-                  ? "col-span-2 aspect-[4/3] md:aspect-auto"
-                  : "col-span-1 aspect-square md:aspect-auto"
+                ? "col-span-2 aspect-[4/3] md:aspect-auto"
+                : "col-span-1 aspect-square md:aspect-auto"
             }`}
           >
             <img
               src={image}
-              alt={index === 0 ? selectedProduct.name : `${selectedProduct.name} detail ${index}`}
+              alt={
+                index === 0
+                  ? selectedProduct.name
+                  : `${selectedProduct.name} detail ${index}`
+              }
               className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
-            
           </div>
         ))}
       </div>
@@ -104,14 +121,22 @@ export default function ProductDetail() {
                   {selectedProduct.name}
                 </h1>
                 <div className="mt-3 flex items-center gap-2">
-                  <Rating.Half value={4.9} totalStars={5} className="scale-75 origin-left" />
-                  <span className="text-sm font-medium text-gray-600">4.9 (44 reviews)</span>
+                  <Rating.Half
+                    value={4.9}
+                    totalStars={5}
+                    className="scale-75 origin-left"
+                  />
+                  <span className="text-sm font-medium text-gray-600">
+                    4.9 (44 reviews)
+                  </span>
                 </div>
               </div>
 
               <button
                 type="button"
-                aria-label={isFavourite ? "Remove from wishlist" : "Add to wishlist"}
+                aria-label={
+                  isFavourite ? "Remove from wishlist" : "Add to wishlist"
+                }
                 aria-pressed={isFavourite}
                 onClick={triggerFavorite}
                 className={`grid size-11 place-items-center rounded-full border transition-all duration-300 active:scale-75 ${
@@ -120,13 +145,21 @@ export default function ProductDetail() {
                     : "border-gray-200 bg-white text-gray-600 hover:border-gray-400 hover:text-gray-900"
                 } ${isFavAnimating ? "scale-125" : "scale-100"}`}
               >
-                <Heart className="size-5 transition-transform duration-200" fill={isFavourite ? "currentColor" : "none"} />
+                <Heart
+                  className="size-5 transition-transform duration-200"
+                  fill={isFavourite ? "currentColor" : "none"}
+                />
               </button>
             </div>
 
             {/* Colors */}
             <fieldset className="mt-8">
-              <legend className="text-sm font-semibold text-gray-800">Color: <span className="font-normal text-gray-600">{selectedColor}</span></legend>
+              <legend className="text-sm font-semibold text-gray-800">
+                Color:{" "}
+                <span className="font-normal text-gray-600">
+                  {selectedColor}
+                </span>
+              </legend>
               <div className="mt-3 flex gap-3">
                 {productColors.map((color) => (
                   <button
@@ -136,7 +169,9 @@ export default function ProductDetail() {
                     aria-pressed={selectedColor === color.name}
                     onClick={() => setSelectedColor(color.name)}
                     className={`grid size-9 place-items-center rounded-full border-2 transition-all duration-300 hover:scale-110 active:scale-95 ${
-                      selectedColor === color.name ? "border-gray-900 scale-105 shadow-sm" : "border-transparent"
+                      selectedColor === color.name
+                        ? "border-gray-900 scale-105 shadow-sm"
+                        : "border-transparent"
                     }`}
                   >
                     <span
@@ -150,7 +185,12 @@ export default function ProductDetail() {
 
             {/* Sizes */}
             <fieldset className="mt-8">
-              <legend className="text-sm font-semibold text-gray-800">Size: <span className="font-normal text-gray-600">{selectedSize}</span></legend>
+              <legend className="text-sm font-semibold text-gray-800">
+                Size:{" "}
+                <span className="font-normal text-gray-600">
+                  {selectedSize}
+                </span>
+              </legend>
               <div className="mt-3 flex flex-wrap gap-2.5">
                 {productSizes.map((size) => (
                   <button
@@ -176,7 +216,11 @@ export default function ProductDetail() {
             className="mt-8 rounded-none border-x-0 border-t border-gray-200 bg-transparent"
           >
             {productInformation.map((item) => (
-              <AccordionItem key={item.value} value={item.title} className="border-b border-gray-200">
+              <AccordionItem
+                key={item.value}
+                value={item.title}
+                className="border-b border-gray-200"
+              >
                 <AccordionTrigger className="px-0 font-semibold text-gray-800 hover:text-gray-900">
                   {item.title}
                 </AccordionTrigger>
@@ -193,7 +237,9 @@ export default function ProductDetail() {
           <div>
             {/* Purchase banner */}
             <div className="rounded-xl flex items-center justify-between gap-4 bg-gray-950 p-4 text-white shadow-lg transition-all duration-300">
-              <p className="text-2xl font-bold tracking-tight">{selectedProduct.price}</p>
+              <p className="text-2xl font-bold tracking-tight">
+                {selectedProduct.price}
+              </p>
               <Button
                 type="button"
                 variant="outline"
@@ -201,12 +247,14 @@ export default function ProductDetail() {
                 onClick={handleAddToCart}
                 disabled={isAdding}
                 className={`min-w-[7.5rem] border-white bg-white text-black hover:bg-gray-100 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 ${
-                  isInBag ? "bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700" : ""
+                  isInBag
+                    ? "bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700"
+                    : ""
                 }`}
               >
                 {isAdding ? (
                   <>
-                    <Loader2 className="size-4 animate-spin" />
+                    <Spinner />
                     <span>Adding...</span>
                   </>
                 ) : isInBag ? (
@@ -226,15 +274,23 @@ export default function ProductDetail() {
             {/* Reviews list */}
             <div className="mt-8 border-t border-gray-200 pt-6">
               <div className="mb-5 flex items-center justify-between">
-                <h2 className="text-lg font-bold text-gray-800">Reviews (44)</h2>
-                <button type="button" className="text-sm font-medium text-gray-700 underline underline-offset-4 hover:text-gray-900 transition-colors">
+                <h2 className="text-lg font-bold text-gray-800">
+                  Reviews (44)
+                </h2>
+                <button
+                  type="button"
+                  className="text-sm font-medium text-gray-700 underline underline-offset-4 hover:text-gray-900 transition-colors"
+                >
                   See more
                 </button>
               </div>
 
               <div className="space-y-6">
                 {reviews.map((review) => (
-                  <article key={review.name} className="transition-all duration-300 hover:translate-x-1">
+                  <article
+                    key={review.name}
+                    className="transition-all duration-300 hover:translate-x-1"
+                  >
                     <div className="flex items-center gap-3">
                       <div className="grid size-9 place-items-center rounded-full bg-gray-200 text-xs font-semibold text-gray-800 shadow-sm">
                         {review.name
@@ -243,7 +299,9 @@ export default function ProductDetail() {
                           .join("")}
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">{review.name}</p>
+                        <p className="text-sm font-semibold text-gray-900">
+                          {review.name}
+                        </p>
                         <Rating.Half
                           value={review.rating}
                           totalStars={5}
@@ -251,7 +309,9 @@ export default function ProductDetail() {
                         />
                       </div>
                     </div>
-                    <p className="mt-2.5 text-sm leading-6 text-gray-600 pl-1">{review.text}</p>
+                    <p className="mt-2.5 text-sm leading-6 text-gray-600 pl-1">
+                      {review.text}
+                    </p>
                   </article>
                 ))}
               </div>

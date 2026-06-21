@@ -1,59 +1,80 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { Heart, ShoppingBag } from "lucide-react"
 import { ProductListItem } from "./data"
+import LocalizedClientLink from "@/modules/common/components/localized-client-link"
+import {
+  Card,
+  CardMedia,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card/Card"
 
 type ProductCardProps = {
   product: ProductListItem
   index?: number
+  href: string 
 }
 
-export default function ProductCard({ product, index }: ProductCardProps) {
+export default function ProductCard({ product, index, href }: ProductCardProps) {
   const [liked, setLiked] = useState(false)
   const [isLikedAnimating, setIsLikedAnimating] = useState(false)
   const [inCart, setInCart] = useState(false)
   const [isCartAnimating, setIsCartAnimating] = useState(false)
 
-  const toggleLike = () => {
+  const toggleLike = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation() 
     setLiked((v) => !v)
     setIsLikedAnimating(true)
     setTimeout(() => setIsLikedAnimating(false), 250)
   }
 
-  const toggleCart = () => {
+  const toggleCart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
     setInCart((v) => !v)
     setIsCartAnimating(true)
     setTimeout(() => setIsCartAnimating(false), 250)
   }
 
   return (
-    <article
-      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white p-3.5 border border-gray-100/60 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1.5 animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-both"
+    <Card
+      size="sm"
+      variant="default"
+      hoverEffect="lift"
+      className="relative flex h-full flex-col overflow-hidden rounded-2xl animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-both"
       style={index !== undefined ? { animationDelay: `${index * 75}ms` } : undefined}
     >
-      <div className="relative overflow-hidden rounded-xl aspect-square w-full bg-gray-50">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-        />
-        {/* Subtle overlay */}
-        <div className="absolute inset-0 bg-black/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
-      </div>
+      <CardMedia
+        src={product.image}
+        alt={product.name}
+        aspectRatio="square"
+        className="transition-transform duration-500 ease-out group-hover:scale-105"
+      />
 
-      <div className="flex-1 flex flex-col justify-between mt-3.5">
-        <div>
-          <h3 className="text-base font-bold text-gray-900 group-hover:text-black transition-colors">{product.name}</h3>
-          <p className="mt-1 text-xs text-gray-500 line-clamp-2 leading-relaxed">{product.description}</p>
-        </div>
+      <div className="flex flex-1 flex-col p-4 pt-3.5">
+        <CardHeader className="mt-0 p-0 space-y-1">
+          <CardTitle className="font-semibold group-hover:text-black transition-colors text-base tracking-tight line-clamp-1">
+            <LocalizedClientLink href={href} className="focus:outline-none after:absolute after:inset-0 after:z-10 after:content-['']">
+              {product.name}
+            </LocalizedClientLink>
+          </CardTitle>
+          <CardDescription className="font-normal text-xs text-gray-500 leading-relaxed line-clamp-2 min-h-[2.5rem]">
+            {product.description}
+          </CardDescription>
+        </CardHeader>
 
-        <div className="mt-4 flex items-center justify-between">
-          <div className="rounded-lg bg-gray-50 border border-gray-100/80 px-2.5 py-1 text-xs font-bold text-gray-800 shadow-sm">
+        <CardFooter className="mt-auto p-0 pt-3 flex justify-between items-center gap-2">
+          <div className="inline-block rounded-lg bg-gray-50 border border-gray-100/80 px-2.5 py-1 text-xs font-bold text-gray-800 shadow-sm">
             {product.price}
           </div>
 
-          <div className="flex gap-2">
+          <div className="relative z-20 flex gap-2">
             <button
               type="button"
               aria-pressed={liked}
@@ -82,8 +103,8 @@ export default function ProductCard({ product, index }: ProductCardProps) {
               <ShoppingBag className="size-4" />
             </button>
           </div>
-        </div>
+        </CardFooter>
       </div>
-    </article>
+    </Card>
   )
 }
